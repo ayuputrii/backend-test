@@ -1,14 +1,19 @@
 const express = require("express");
+const cors = require("cors");
+
 require("dotenv").config();
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 // Routes
 const userRoute = require("./src/routes");
+const productRoute = require("./src/routes/product");
 
 // Router
 app.use("/api/v1/user", userRoute);
+app.use("/api/v1/product", productRoute);
 
 // Connect Database
 const db = require("./src/config/db");
